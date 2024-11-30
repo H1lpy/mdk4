@@ -49,16 +49,16 @@ INSERT INTO sabirov_227_specialty (id,"name") VALUES
 	 (10,'Хирург');
 	
 INSERT INTO sabirov_227_doctors (id,surname,"name",patronymic,allocation_percentage,id_specialty) VALUES
-	 (1,'Поляков','Фёдор','Миронович',0.13,3),
-	 (2,'Романова','Мирослава','Константиновна',0.13,2),
-	 (3,'Михайлов','Гордей','Федорович',0.13,5),
-	 (4,'Пестов','Пантелеймон','Всеволодович',0.13,8),
-	 (5,'Силин','Лукьян','Эльдарович',0.13,10),
-	 (6,'Фролов','Макар','Серапионович',0.13,7),
-	 (7,'Панов','Овидий','Васильевич',0.13,3),
-	 (8,'Калинин','Ермолай','Германович',0.13,2),
-	 (9,'Бирюков','Мартин','Юрьевич',0.13,1),
-	 (10,'Авдеев','Гордей','Станиславович',0.13,6);
+	 (1,'Поляков','Фёдор','Миронович',0.64,3),
+	 (2,'Романова','Мирослава','Константиновна',0.64,2),
+	 (3,'Михайлов','Гордей','Федорович',0.64,5),
+	 (4,'Пестов','Пантелеймон','Всеволодович',0.64,8),
+	 (5,'Силин','Лукьян','Эльдарович',0.64,10),
+	 (6,'Фролов','Макар','Серапионович',0.64,7),
+	 (7,'Панов','Овидий','Васильевич',0.64,3),
+	 (8,'Калинин','Ермолай','Германович',0.64,2),
+	 (9,'Бирюков','Мартин','Юрьевич',0.64,1),
+	 (10,'Авдеев','Гордей','Станиславович',0.64,6);
 	
 INSERT INTO sabirov_227_patient (id,surname,"name",patronymic,birthday,address) VALUES
 	 (1,'Блинов','Демьян','Сергеевич','2004-12-09','г. Новокузнецк, Кирова ул., д. 5'),
@@ -91,7 +91,7 @@ select
 	sabirov_227_doctors.name,
 	patronymic,
 	sabirov_227_specialty.name as "speciality",
-	(select sum(price) from sabirov_227_appointment where sabirov_227_doctors.id = sabirov_227_appointment.id_doctors) * 0.87 as "salary"
+	(select sum(price) from sabirov_227_appointment where sabirov_227_doctors.id = sabirov_227_appointment.id_doctors) * allocation_percentage * (1-13/100) as "salary"
 from sabirov_227_doctors
 inner join sabirov_227_specialty on sabirov_227_specialty.id = id_specialty;
 
